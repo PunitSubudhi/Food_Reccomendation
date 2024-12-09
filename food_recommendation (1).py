@@ -24,7 +24,7 @@ loading_animation = load_lottieurl("https://assets9.lottiefiles.com/packages/lf2
 chef_animation = load_lottieurl("https://assets10.lottiefiles.com/packages/lf20_kxsd2ytq.json")  # Happy chef animation
 
 # Load dataset
-menu_df = pd.read_csv('C:\\Users\\Ankan\\Downloads\\corrected_menu_dataset.csv')
+menu_df = pd.read_csv('corrected_menu_dataset.csv')
 
 # Keyword mapping for precise type extraction
 types = {
