@@ -9,7 +9,6 @@ Original file is located at
 
 import streamlit as st
 import pandas as pd
-from streamlit_lottie import st_lottie
 import requests
 from groq import Groq
 import os
@@ -20,16 +19,6 @@ GROQ_API_KEY = "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"
 # Initialize Groq API
 client = Groq(api_key=GROQ_API_KEY)
 # Helper to load Lottie animations
-def load_lottieurl(url):
-    response = requests.get(url)
-    if response.status_code != 200:
-        return None
-    return response.json()
-
-# Load animations
-loading_animation = load_lottieurl("https://assets9.lottiefiles.com/packages/lf20_wnqlfojb.json")
-chef_animation = load_lottieurl("https://assets10.lottiefiles.com/packages/lf20_kxsd2ytq.json")  # Happy chef animation
-
 # Load dataset
 menu_df = pd.read_csv('C:\\Users\\Ankan\\Downloads\\corrected_menu_dataset.csv')
 
@@ -367,7 +356,6 @@ if query:
 if st.button("Find My Dish"):
     if query.strip():
         with st.spinner("Cooking up your recommendations..."):
-            st_lottie(loading_animation, height=200, key="loading")
             preferences = extract_preferences(query)
             recommendations = recommend_food(preferences)
 
@@ -390,7 +378,6 @@ if st.button("Find My Dish"):
                         args=(row["Item Name"], row["Price"], preferences),
                     ):
                         pass
-                st_lottie(chef_animation, height=200, key="chef")
             else:
                 st.warning(recommendations)
     else:
