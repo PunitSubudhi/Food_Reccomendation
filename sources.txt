@@ -1,0 +1,57 @@
+# sources.txt
+
+## Dataset
+- Source: Custom food dataset
+- File Path: corrected_menu_dataset.csv
+- Description: This dataset contains information about food items, including names, prices, types, cuisines, ratings, and discounts.
+
+## APIs
+- Groq API:
+  - API Key: [Hidden for security]
+  - Description: Used for query translation and enhancing natural language processing capabilities.
+  - Documentation: https://groq.com/docs
+
+## Libraries and Frameworks
+- Streamlit:
+  - Description: Used to build the interactive user interface.
+  - Website: https://streamlit.io/
+
+- pandas:
+  - Description: Used for data manipulation and analysis.
+  - Website: https://pandas.pydata.org/
+
+- fuzzywuzzy:
+  - Description: Used for fuzzy matching of user queries with dataset entries.
+  - Website: https://github.com/seatgeek/fuzzywuzzy
+
+- requests:
+  - Description: Used to fetch external resources like Lottie animations.
+  - Website: https://docs.python-requests.org/
+
+- streamlit-lottie:
+  - Description: Used to integrate Lottie animations in the Streamlit app.
+  - Website: https://github.com/andfanilo/streamlit-lottie
+
+## Animations
+- Loading Animation:
+  - URL: https://assets9.lottiefiles.com/packages/lf20_wnqlfojb.json
+  - Description: Animated spinning loader for user interface.
+
+- Chef Animation:
+  - URL: https://assets10.lottiefiles.com/packages/lf20_kxsd2ytq.json
+  - Description: Animation of a happy chef to enhance user engagement.
+
+## Other Assets
+- Custom CSS:
+  - Description: Used to style the user interface for a modern and sleek appearance.
+  - File: Embedded in Streamlit script as inline CSS.
+
+## Documentation and References
+- Streamlit Documentation: https://docs.streamlit.io/
+- Python Official Documentation: https://docs.python.org/3/
+- FuzzyWuzzy Documentation: https://github.com/seatgeek/fuzzywuzzy
+- Lottie Animation Repository: https://lottiefiles.com/
+
+## Contributors
+- Ankan (Primary Developer)
+- ChatGPT (Technical Assistant for Logic and UI Design)
