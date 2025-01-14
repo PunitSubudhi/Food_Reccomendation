@@ -11,16 +11,15 @@ import streamlit as st
 import pandas as pd
 import requests
 from groq import Groq
-import os
 from fuzzywuzzy import process,fuzz
 
-GROQ_API_KEY = "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"
+GROQ_API_KEY = st.secrets.GROQ.API_KEY
 
 # Initialize Groq API
 client = Groq(api_key=GROQ_API_KEY)
 # Helper to load Lottie animations
 # Load dataset
-menu_df = pd.read_csv('C:\\Users\\Ankan\\Downloads\\corrected_menu_dataset.csv')
+menu_df = pd.read_csv('corrected_menu_dataset.csv')
 
 # Groq translation function
 def translate_with_groq(user_query, target_language="en"):
@@ -127,14 +126,14 @@ def recommend_food(preferences):
     filtered_menu["Item Name"] = filtered_menu["Item Name"].str.lower()  # Ensure consistent case
 
     # Debugging Output (Print preferences)
-    print("Preferences:", preferences)
+    # print("Preferences:", preferences)
 
     # Step 1: Filter exact matches
     if search_term:
         exact_matches = filtered_menu[
             filtered_menu["Item Name"].str.contains(rf"\b{search_term.lower()}\b", case=False, na=False)
         ]
-        print("Exact Matches:", exact_matches)  # Debugging Output
+        # print("Exact Matches:", exact_matches)  # Debugging Output
 
         if budget:
             exact_matches = exact_matches[exact_matches["Price"] <= budget]
@@ -150,7 +149,7 @@ def recommend_food(preferences):
     if search_term:
         menu_items = filtered_menu["Item Name"].dropna().tolist()
         fuzzy_matches = process.extract(search_term, menu_items, limit=10, scorer=fuzz.partial_ratio)
-        print("Fuzzy Matches:", fuzzy_matches)  # Debugging Output
+        # print("Fuzzy Matches:", fuzzy_matches)  # Debugging Output
 
         fuzzy_items = [match[0] for match in fuzzy_matches if match[1] > 85]  # Adjust threshold if needed
         fuzzy_filtered = filtered_menu[filtered_menu["Item Name"].isin(fuzzy_items)]
@@ -344,7 +343,9 @@ st.markdown('<div class="title">🍽️ Welcome to Guli</div>', unsafe_allow_htm
 st.markdown('<div class="subtitle">Your personalized food guide awaits!</div>', unsafe_allow_html=True)
 
 # User Query Input
-query = st.text_input("Feeling hungry? Describe your mood (e.g., 'I want Mexican food under 200')")
+with st.form("query_form",enter_to_submit=True,border=False):
+    query = st.text_input("Feeling hungry? Describe your mood (e.g., 'I want Mexican food under 200')")
+    form_submit = st.form_submit_button("Find My Dish")
 
 # Extract preferences and update initial budget
 if query:
@@ -353,7 +354,7 @@ if query:
         st.session_state["remaining_budget"] = preferences["budget"]
 
 # Recommendations Button
-if st.button("Find My Dish"):
+if form_submit:
     if query.strip():
         with st.spinner("Cooking up your recommendations..."):
             preferences = extract_preferences(query)
